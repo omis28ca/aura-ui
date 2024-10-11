@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Aura</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+
+        .btn-square-md {
+            width: 100px !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            height: 100px !important;
+            text-align: center;
+            padding: 0px;
+            margin-right: 2px;
+            margin-left: 2px;
+            font-size: 24px;
+        }
+        .circle, .circle::before {
+            content: " ";
+            margin: 15px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 0 auto;
+            transition: all 0.3s;
+            background-color: #af4701;
+        }
+
+        .circle::before {
+            animation: mymove 2s infinite;
+            position: absolute;
+            background-color: #f1e205
+        }
+
+        @-webkit-keyframes mymove {
+            50%   {
+                transform: scale(2);
+                opacity: 0
+            }
+            100%   {
+                transform: scale(2);
+                opacity: 0
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div class="container-fluid position-relative d-flex p-0">
+    <!-- Spinner Start -->
+    <div id="spinner"
+         class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Sidebar Start -->
+    <div class="sidebar pe-4 pb-3 open">
+        <nav class="navbar bg-secondary navbar-dark">
+            <a href="#" class="navbar-brand mx-4 mb-3">
+                <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>AURA</h3>
+            </a>
+            <div class="d-flex align-items-center ms-4 mb-4">
+                <div class="position-relative">
+                    <img class="rounded-circle" src="img/logo.png" alt="" style="width: 40px; height: 40px;">
+                    <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-0">Log</h6>
+                    <span id="lbl_log">n/a</span>
+                </div>
+            </div>
+            <div class="navbar-nav w-100">
+                <a href="#" class="nav-item nav-link">Dashboard</a>
+                <a href="#" class="nav-item nav-link">Settings</a>
+            </div>
+
+
+        </nav>
+    </div>
+    <!-- Sidebar End -->
+
+
+    <!-- Content Start -->
+    <div class="content open">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+
+            <a href="#" class="navbar-brand d-flex d-lg-none me-4">
+                <h2 class="text-primary mb-0">Aura</h2>
+            </a>
+
+            <a href="#" class="sidebar-toggler flex-shrink-0">
+                +
+            </a>
+
+            <form class="d-none d-md-flex ms-4">
+                <input id="txt_device_id" class="form-control bg-dark border-0" type="text" placeholder="Device ID" value="">
+            </form>
+
+            <form class="d-none d-md-flex ms-4">
+                <img id="lock_status" class="text-info" src="img/icons/lock.png" alt="" style="width: 32px; height: 32px;fill: red; display: none">
+                <img id="unlock_status" class="text-info" src="img/icons/unlocked.png" alt="" style="width: 32px; height: 32px;fill: green;display: none">
+            </form>
+
+            <div class="navbar-nav align-items-center ms-auto">
+                PLASMA: <div id="plasma_status" style="display: none" id="plasma_status" class="circle"></div>
+            </div>
+        </nav>
+        <!-- Navbar End -->
+
+
+        <!-- Chart Start -->
+        <div class="container-fluid pt-4 px-4">
+
+            <div class="row d-flex align-items-center justify-content-center">
+
+                <div class="col-sm-12 col-md-6 col-xl-6 text-center">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            PPM
+                        </div>
+                        <div class="card-body d-flex align-items-center justify-content-center vh-10">
+                            <div id="g4" class="gauge"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 col-md-6 col-xl-6 text-center">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            FAN RPM
+                        </div>
+                        <div class="card-body d-flex align-items-center justify-content-center vh-10">
+                            <div id="g1" class="gauge"></div>
+                        </div>
+                        <div class="card-body d-flex align-items-center justify-content-center vh-10">
+                            <div class="range">
+                                <input type="range" value="0" min="0" max="255" step="5"  class="form-range input-range" id="fan-rpm" />
+                                <span class="range-value">0%</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">PPM Line Chart</h6>
+                        <canvas id="line-chart"></canvas>
+                    </div>
+                </div -->
+
+            </div>
+        </div>
+        <!-- Chart End -->
+
+
+        <!-- Controls Start -->
+        <div id="controls" class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-secondary rounded h-100 p-4 d-flex justify-content-between flex-row ">
+                        <button id="btn_ppm_up" type="button" class="btn btn-info btn-square-md">PPM + </button>
+                        <button id="btn_ppm_dn" type="button" class="btn btn-info btn-square-md">PPM - </button>
+                        <div>&nbsp;</div>
+                        <button id="btn_fan_up" type="button" class="btn btn-success btn-square-md">Fan + </button>
+                        <button id="btn_fan_dn" type="button" class="btn btn-success btn-square-md">Fan - </button>
+                        <div>&nbsp;</div>
+                        <button id="btn_open" type="button" class="btn btn-warning btn-square-md">Open</button>
+                        <button id="btn_on" type="button" class="btn btn-success btn-square-md">On</button>
+                        <button id="btn_off" type="button" class="btn btn-danger btn-square-md">Off</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Controls End -->
+        <div id="keypad" class="container-fluid pt-4 px-4" style="display: none">
+            <div class="row g-4">
+                <div class="col-sm-12 col-md-12 col-xl-12 text-center">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            Enter Code
+                        </div>
+                        <div class="card-body d-flex align-items-center justify-content-center vh-10">
+                            <input style="width: 15%" type="text" id="numberPassword" maxlength="6">
+                        </div>
+                        <div class="card-body d-flex align-items-center justify-content-center vh-10">
+                            <button id="btn_key_1" data-key="1" type="button" class="btn btn-light btn-square-md btn_key">1</button>
+                            <button id="btn_key_2" data-key="2" type="button" class="btn btn-light btn-square-md btn_key">2</button>
+                            <button id="btn_key_3" data-key="3" type="button" class="btn btn-light btn-square-md btn_key">3</button>
+                            <button id="btn_key_4" data-key="4" type="button" class="btn btn-light btn-square-md btn_key">4</button>
+                            <button id="btn_key_5" data-key="5" type="button" class="btn btn-light btn-square-md btn_key">5</button>
+                            <button id="btn_key_6" data-key="6" type="button" class="btn btn-light btn-square-md btn_key">6</button>
+                            <button id="btn_key_7" data-key="7" type="button" class="btn btn-light btn-square-md btn_key">7</button>
+                            <button id="btn_key_8" data-key="8" type="button" class="btn btn-light btn-square-md btn_key">8</button>
+                            <button id="btn_key_9" data-key="9" type="button" class="btn btn-light btn-square-md btn_key">9</button>
+                            <button id="btn_key_0" data-key="0" type="button" class="btn btn-light btn-square-md btn_key">0</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-secondary rounded-top p-4">
+                <div class="row">
+                    <div class="col-12 col-sm-6 text-center text-sm-start">
+                        &copy; <a href="#">Aura Hygienics</a>, All Right Reserved.
+                    </div>
+                    <div class="col-12 col-sm-6 text-center text-sm-end">
+                        Support <a href="">559-000-0000</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+    </div>
+    <!-- Content End -->
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/chart/chart.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="js/mqttws31.js" type="text/javascript"></script>
+<script src="js/raphael.min.js" type="text/javascript"></script>
+<script src="js/justgage.min.js" type="text/javascript"></script>
+<script src="js/pouchdb-7.0.0.min.js" type="text/javascript"></script>
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</body>
+
+</html>

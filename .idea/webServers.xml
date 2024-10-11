@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4bc3a74b-0df0-4677-a0d6-d159534d1b06" name="192.168.1.230">
+        <fileTransfer rootFolder="/root/aura" accessType="SFTP" host="192.168.1.230" port="22" sshConfigId="d7a07a0c-8da7-44ab-a931-6b2ff1d44426" sshConfig="root@192.168.1.230:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
