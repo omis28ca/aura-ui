@@ -82,6 +82,7 @@ function createWindow () {
     height: 900,
     backgroundColor: "#000000",
     title: app.getName(),
+    kiosk: true, // Enables kiosk mode
     icon: path.join(__dirname, 'img/icons/desktop/favicon-16x16.png'),
     show: true, // Hide your application until your page has loaded
     webPreferences: {
